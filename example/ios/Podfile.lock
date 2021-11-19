@@ -383,11 +383,11 @@ PODS:
   - RNFBApp (11.5.0):
     - Firebase/CoreOnly (= 7.11.0)
     - React-Core
-  - RNFBMessaging (11.5.0):
+  - RNFBMessaging (13.0.1):
     - Firebase/Messaging (= 7.11.0)
     - React-Core
     - RNFBApp
-  - RNVoipPushNotification (3.1.0):
+  - RNVoipPushNotification (3.3.0):
     - React-Core
   - TwilioVoice (6.3.0)
   - Yoga (1.14.0)
@@ -549,7 +549,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 7b423f9e248eae65987838148c36eec1dbfe0b53
-  FBReactNativeSpec: dba5cd2a146a3230a38feceebbf8f7e2e011614a
+  FBReactNativeSpec: 87451b10a8e62caf3472b3e459c9fe3c42621166
   Firebase: c121feb35e4126c0b355e3313fa9b487d47319fd
   FirebaseCore: 907447d8917a4d3eb0cce2829c5a0ad21d90b432
   FirebaseCoreDiagnostics: 68ad972f99206cef818230f3f3179d52ccfb7f8c
@@ -596,12 +596,12 @@ SPEC CHECKSUMS:
   ReactCommon: bedc99ed4dae329c4fcf128d0c31b9115e5365ca
   RNCallKeep: df979b93285cd7e70df8687eacb0c9bdf3be28be
   RNFBApp: 9c90f9d576861947ba75fe0830567c570bcbcf6d
-  RNFBMessaging: c873e6c37f69d22de22cab134413030a9c6330a9
-  RNVoipPushNotification: d076a99d761f91cf6042172ec8390b6e4360f9b2
+  RNFBMessaging: dc20ec0a87e4203135131426c1c467281d3e20cb
+  RNVoipPushNotification: 14bb5a389588ea1cbee4706a55df99950687fd6d
   TwilioVoice: 6b1d796dcdec4ec6e6d2165bc66a266db1d2d93f
   Yoga: a7de31c64fe738607e7a3803e3f591a4b1df7393
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: cee69f849a4289d729dcc6029da8255d251d2c14
+PODFILE CHECKSUM: 54d8b438505fb22be71f475cb94eb6ef9ffc607a
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

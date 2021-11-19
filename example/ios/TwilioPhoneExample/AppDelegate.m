@@ -86,26 +86,16 @@ continueUserActivity:(NSUserActivity *)userActivity
               restorationHandler:restorationHandler];
 }
 
-// --- Handle updated push credentials
-- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(PKPushType)type {
-  // Register VoIP push token (a property of PKPushCredentials) with server
-  [RNVoipPushNotificationManager didUpdatePushCredentials:credentials forType:(NSString *)type];
-}
-
-- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(PKPushType)type {
-  // --- The system calls this method when a previously provided push token is no longer valid for use. No action is necessary on your part to reregister the push type. Instead, use this method to notify your server not to send push notifications using the matching push token.
-}
-
 // --- Handle incoming pushes (for ios >= 11)
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void (^)(void))completion {
   // --- Retrieve information from Twilio push payload
   NSString *uuid = [[[NSUUID UUID] UUIDString] lowercaseString];
   NSString *callerName = [payload.dictionaryPayload[@"twi_from"] stringByReplacingOccurrencesOfString:@"client:" withString:@""];
   NSString *handle = [payload.dictionaryPayload[@"twi_to"] stringByReplacingOccurrencesOfString:@"client:" withString:@""];
-  
+
   // --- Process the received push
   [RNVoipPushNotificationManager didReceiveIncomingPushWithPayload:payload forType:(NSString *)type];
-  
+
   // --- You should make sure to report to callkit BEFORE execute `completion()`
   [RNCallKeep reportNewIncomingCall:uuid
                              handle:handle
@@ -119,8 +109,39 @@ continueUserActivity:(NSUserActivity *)userActivity
                         fromPushKit:YES
                             payload:payload.dictionaryPayload
               withCompletionHandler:nil];
-  
+
   completion();
 }
+
+- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(PKPushType)type {
+  // --- The system calls this method when a previously provided push token is no longer valid for use. No action is necessary on your part to reregister the push type. Instead, use this method to notify your server not to send push notifications using the matching push token.
+}
+
+// --- Handle incoming pushes (for ios >= 11)
+//- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(PKPushType)type withCompletionHandler:(void (^)(void))completion {
+//  // --- Retrieve information from Twilio push payload
+//  NSString *uuid = [[[NSUUID UUID] UUIDString] lowercaseString];
+//  NSString *callerName = [payload.dictionaryPayload[@"twi_from"] stringByReplacingOccurrencesOfString:@"client:" withString:@""];
+//  NSString *handle = [payload.dictionaryPayload[@"twi_to"] stringByReplacingOccurrencesOfString:@"client:" withString:@""];
+//
+//  // --- Process the received push
+//  [RNVoipPushNotificationManager didReceiveIncomingPushWithPayload:payload forType:(NSString *)type];
+//
+//  // --- You should make sure to report to callkit BEFORE execute `completion()`
+//  [RNCallKeep reportNewIncomingCall:uuid
+//                             handle:handle
+//                         handleType:@"generic"
+//                           hasVideo:NO
+//                localizedCallerName:callerName
+//                    supportsHolding:YES
+//                       supportsDTMF:YES
+//                   supportsGrouping:YES
+//                 supportsUngrouping:YES
+//                        fromPushKit:YES
+//                            payload:payload.dictionaryPayload
+//              withCompletionHandler:nil];
+//
+//  completion();
+//}
 
 @end
