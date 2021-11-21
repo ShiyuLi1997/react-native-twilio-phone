@@ -43,18 +43,22 @@ const callKeepOptions = {
     },
   },
 };
-
 async function fetchAccessToken() {
   const response = await fetch(
-    'https://XXXXXX.ngrok.io/accessToken?identity=' +
-      identity +
-      '&os=' +
-      Platform.OS
+    'https://fordcalling-6178-dev.twil.io/token?identity=Ford'
   );
-  const accessToken = await response.text();
-
-  return accessToken;
+  const accessToken = await response.json();
+  console.log("token: ", accessToken)
+  return accessToken['accessToken'];
 }
+// async function fetchAccessToken() {
+//   const response = await fetch(
+//     'https://fordcalling-6178-dev.twil.io/token?identity=Ford'
+//   );
+//   const accessToken = await response.text();
+
+//   return accessToken;
+// }
 
 export function App() {
   const [to, setTo] = React.useState('');
@@ -100,7 +104,7 @@ export function App() {
     setCallInProgress(true);
 
     try {
-      await RNTwilioPhone.startCall(to, 'My friend', from);
+      await RNTwilioPhone.startCall(to, 'My friend', "+13192532410");
     } catch (e) {
       console.log(e);
       setCallInProgress(false);
